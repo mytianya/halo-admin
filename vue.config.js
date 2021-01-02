@@ -42,7 +42,16 @@ module.exports = {
       }
     }
   },
-
+  devServer: {
+    proxy: {
+      "/api": {
+        target: 'http://localhost:8090/', // 目标代理接口地址
+        secure: false,
+        changeOrigin: true,// 开启代理，在本地创建一个虚拟服务端
+        ws: true
+      }
+    }
+  },
   lintOnSave: undefined,
   // babel-loader no-ignore node_modules/*
   transpileDependencies: [],

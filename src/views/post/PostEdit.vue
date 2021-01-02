@@ -3,11 +3,7 @@
     <a-row :gutter="12">
       <a-col :span="24">
         <div class="mb-4">
-          <a-input
-            v-model="postToStage.title"
-            size="large"
-            placeholder="请输入文章标题"
-          />
+          <a-input v-model="postToStage.title" size="large" placeholder="请输入文章标题" />
         </div>
 
         <div id="editor">
@@ -41,8 +37,10 @@
     />
 
     <AttachmentDrawer v-model="attachmentDrawerVisible" />
-
-    <footer-tool-bar :style="{ width: isSideMenu() && isDesktop() ? `calc(100% - ${sidebarOpened ? 256 : 80}px)` : '100%' }">
+    <PostResource />
+    <footer-tool-bar
+      :style="{ width: isSideMenu() && isDesktop() ? `calc(100% - ${sidebarOpened ? 256 : 80}px)` : '100%' }"
+    >
       <a-space>
         <ReactiveButton
           type="danger"
@@ -54,18 +52,9 @@
           loadedText="保存成功"
           erroredText="保存失败"
         ></ReactiveButton>
-        <a-button
-          @click="handlePreview"
-          :loading="previewSaving"
-        >预览</a-button>
-        <a-button
-          type="primary"
-          @click="postSettingVisible = true"
-        >发布</a-button>
-        <a-button
-          type="dashed"
-          @click="attachmentDrawerVisible = true"
-        >附件库</a-button>
+        <a-button @click="handlePreview" :loading="previewSaving">预览</a-button>
+        <a-button type="primary" @click="postSettingVisible = true">发布</a-button>
+        <a-button type="dashed" @click="attachmentDrawerVisible = true">附件库</a-button>
       </a-space>
     </footer-tool-bar>
   </div>
@@ -80,6 +69,7 @@ import PostSettingDrawer from './components/PostSettingDrawer'
 import AttachmentDrawer from '../attachment/components/AttachmentDrawer'
 import FooterToolBar from '@/components/FooterToolbar'
 import MarkdownEditor from '@/components/Editor/MarkdownEditor'
+import PostResource from '@/views/post/PostResource'
 // import RichTextEditor from '@/components/editor/RichTextEditor'
 
 import postApi from '@/api/post'
@@ -90,6 +80,7 @@ export default {
     FooterToolBar,
     AttachmentDrawer,
     MarkdownEditor,
+    PostResource
     // RichTextEditor
   },
   data() {
