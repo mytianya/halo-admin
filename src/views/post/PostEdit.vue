@@ -23,7 +23,26 @@
     </a-row>
     <a-row :gutter="12">
       <a-col :span="24">
-        <PostResource />
+        <a-button type="dashed" @click="plusResourceItem()">
+          <a-icon type="plus" /> 添加资源
+        </a-button>
+        <a-form layout="inline" v-for="(res, index) in postToStage.resources" :key="index">
+          <a-form-item label="资源描述">
+            <a-input placeholder="资源描述" v-model="res.name" />
+          </a-form-item>
+          <a-form-item label="资源地址">
+            <a-input placeholder="资源链接地址" v-model="res.url"/>
+          </a-form-item>
+          <a-form-item label="提取码">
+            <a-input placeholder="提取码" v-model="res.shareCode"/>
+          </a-form-item>
+          <a-form-item>
+            <a-switch checked-children="可见" un-checked-children="不可见" default-checked v-model="res.status"/>
+          </a-form-item>
+          <a-form-item>
+            <a-button type="danger" icon="minus" @click="minusResourceItem(index)"></a-button>
+          </a-form-item>
+        </a-form>
       </a-col>
     </a-row>
 
@@ -85,29 +104,31 @@ export default {
     FooterToolBar,
     AttachmentDrawer,
     MarkdownEditor,
-    PostResource
+    PostResource,
     // RichTextEditor
   },
   data() {
     return {
       attachmentDrawerVisible: false,
       postSettingVisible: false,
-      postToStage: {},
+      postToStage: {
+        resources: []
+      },
       selectedTagIds: [],
       selectedCategoryIds: [],
       selectedMetas: [],
       contentChanges: 0,
       draftSaving: false,
       previewSaving: false,
-      draftSavederrored: false
+      draftSavederrored: false,
     }
   },
   beforeRouteEnter(to, from, next) {
     // Get post id from query
     const postId = to.query.postId
-    next(vm => {
+    next((vm) => {
       if (postId) {
-        postApi.get(postId).then(response => {
+        postApi.get(postId).then((response) => {
           const post = response.data.data
           vm.postToStage = post
           vm.selectedTagIds = post.tagIds
@@ -141,13 +162,13 @@ export default {
     } else {
       this.$confirm({
         title: '当前页面数据未保存，确定要离开吗？',
-        content: h => <div style="color:red;">如果离开当面页面，你的数据很可能会丢失！</div>,
+        content: (h) => <div style="color:red;">如果离开当面页面，你的数据很可能会丢失！</div>,
         onOk() {
           next()
         },
         onCancel() {
           next(false)
-        }
+        },
       })
     }
   },
@@ -168,15 +189,21 @@ export default {
       if (newValue) {
         this.contentChanges++
       }
-    }
+    },
   },
   computed: {
     temporaryContent() {
       return this.postToStage.originalContent
-    }
+    },
     // ...mapGetters(['options'])
   },
   methods: {
+    minusResourceItem(index) {
+      this.postToStage.resources.splice(index, 1)
+    },
+    plusResourceItem() {
+      this.postToStage.resources.push({})
+    },
     handleSaveDraft(draftOnly = false) {
       this.$log.debug('Draft only: ' + draftOnly)
       this.postToStage.status = 'DRAFT'
@@ -189,7 +216,7 @@ export default {
         if (draftOnly) {
           postApi
             .updateDraft(this.postToStage.id, this.postToStage.originalContent)
-            .then(response => {
+            .then((response) => {
               this.handleRestoreSavedStatus()
             })
             .catch(() => {
@@ -203,7 +230,7 @@ export default {
         } else {
           postApi
             .update(this.postToStage.id, this.postToStage, false)
-            .then(response => {
+            .then((response) => {
               this.postToStage = response.data.data
               this.handleRestoreSavedStatus()
             })
@@ -220,7 +247,7 @@ export default {
         // Create the post
         postApi
           .create(this.postToStage, false)
-          .then(response => {
+          .then((response) => {
             this.postToStage = response.data.data
             this.handleRestoreSavedStatus()
           })
@@ -242,11 +269,11 @@ export default {
       this.previewSaving = true
       if (this.postToStage.id) {
         // Update the post
-        postApi.update(this.postToStage.id, this.postToStage, false).then(response => {
+        postApi.update(this.postToStage.id, this.postToStage, false).then((response) => {
           this.$log.debug('Updated post', response.data.data)
           postApi
             .preview(this.postToStage.id)
-            .then(response => {
+            .then((response) => {
               window.open(response.data, '_blank')
               this.handleRestoreSavedStatus()
             })
@@ -258,12 +285,12 @@ export default {
         })
       } else {
         // Create the post
-        postApi.create(this.postToStage, false).then(response => {
+        postApi.create(this.postToStage, false).then((response) => {
           this.$log.debug('Created post', response.data.data)
           this.postToStage = response.data.data
           postApi
             .preview(this.postToStage.id)
-            .then(response => {
+            .then((response) => {
               window.open(response.data, '_blank')
               this.handleRestoreSavedStatus()
             })
@@ -292,7 +319,7 @@ export default {
     },
     onRefreshPostMetasFromSetting(metas) {
       this.selectedMetas = metas
-    }
-  }
+    },
+  },
 }
 </script>

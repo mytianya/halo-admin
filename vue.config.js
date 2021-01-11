@@ -52,7 +52,7 @@ module.exports = {
       }
     }
   },
-  lintOnSave: undefined,
+  lintOnSave: false,
   // babel-loader no-ignore node_modules/*
   transpileDependencies: [],
   productionSourceMap: false
