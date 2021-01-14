@@ -27,20 +27,27 @@
           <a-icon type="plus" /> 添加资源
         </a-button>
         <a-form layout="inline" v-for="(res, index) in postToStage.resources" :key="index">
-          <a-form-item label="资源描述">
-            <a-input placeholder="资源描述" v-model="res.name" />
+          <a-form-item label="资源描述" size="large">
+            <a-input placeholder="资源描述" v-model="res.name"/>
           </a-form-item>
-          <a-form-item label="资源地址">
-            <a-input placeholder="资源链接地址" v-model="res.url"/>
+          <a-form-item label="地址" size="large">
+            <a-input placeholder="资源链接地址" v-model="res.url" style="width:250px"/>
+          </a-form-item>
+          <a-form-item label="类型">
+            <a-select v-model="res.type" placeholder="请选择下载协议" style="width: 150px">
+              <a-select-option v-for="(obj,index) in types" :key="index" :value="obj.value" :title="obj.name">
+                {{ obj.name }}
+              </a-select-option>
+            </a-select>
           </a-form-item>
           <a-form-item label="提取码">
-            <a-input placeholder="提取码" v-model="res.shareCode"/>
+            <a-input placeholder="提取码" v-model="res.shareCode" style="max-width:80px"/>
           </a-form-item>
           <a-form-item>
             <a-switch checked-children="可见" un-checked-children="不可见" default-checked v-model="res.status"/>
           </a-form-item>
           <a-form-item>
-            <a-button type="danger" icon="minus" @click="minusResourceItem(index)"></a-button>
+            <a-button type="danger" icon="minus" @click="minusResourceItem(index)" size="small"></a-button>
           </a-form-item>
         </a-form>
       </a-col>
@@ -121,6 +128,7 @@ export default {
       draftSaving: false,
       previewSaving: false,
       draftSavederrored: false,
+      types: [{ 'name': '网盘', 'value': 'wangpan' }, { 'name': 'bt', 'value': 'bt' }, { 'name': '直链下载', 'value': 'direct' }]
     }
   },
   beforeRouteEnter(to, from, next) {
