@@ -1,49 +1,30 @@
-<h1 align="center"><a href="https://github.com/halo-dev" target="_blank">halo-admin</a></h1>
+<h1 align="center"><a href="https://github.com/halo-dev" target="_blank">Halo</a></h1>
 
-> halo-admin 是 [Halo](https://github.com/halo-dev/halo) 的管理端项目。
+> Halo 是一款现代化的个人独立博客系统，给习惯写博客的同学多一个选择。
 
 <p align="center">
-<a href="https://www.npmjs.com/package/halo-admin"><img alt="npm release" src="https://img.shields.io/npm/v/halo-admin?style=flat-square"/></a>
-<a href="https://www.jsdelivr.com/package/npm/halo-admin"><img alt="npm release" src="https://data.jsdelivr.com/v1/package/npm/halo-admin/badge"/></a>
-<a href="https://github.com/halo-dev/halo-admin/releases"><img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/halo-dev/halo-admin/total.svg?style=flat-square"></a>
-<a href="https://github.com/halo-dev/halo-admin/commits"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/halo-dev/halo-admin.svg?style=flat-square"></a>
-<a href="https://travis-ci.org/halo-dev/halo-admin"><img alt="Travis CI" src="https://img.shields.io/travis/halo-dev/halo-admin.svg?style=flat-square"/></a>
+<a href="https://github.com/halo-dev/halo/releases"><img alt="GitHub release" src="https://img.shields.io/github/release/halo-dev/halo.svg?style=flat-square"/></a>
+<a href="https://github.com/halo-dev/halo/releases"><img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/halo-dev/halo/total.svg?style=flat-square"></a>
+<a href="https://hub.docker.com/r/ruibaby/halo"><img alt="Docker pulls" src="https://img.shields.io/docker/pulls/ruibaby/halo?style=flat-square"></a>
+<a href="https://github.com/halo-dev/halo/commits"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/halo-dev/halo.svg?style=flat-square"></a>
+<a href="https://travis-ci.org/halo-dev/halo"><img alt="Travis CI" src="https://img.shields.io/travis/halo-dev/halo.svg?style=flat-square"/></a>
 </p>
 
 ------------------------------
 
-## 部署方案
+# Halo扩展文章资源管理功能
 
-目前 Halo 的运行包内已经包含了构建好的页面，所以如果你不需要额外部署 admin，你无需做任何操作。
+> 在Halo当前1.4.2版本上面，扩展管理文章的附件资源地址功能
 
-### 独立部署
+- 支持资源可见不可见开关
+- 支持不同类型资源显示
 
-#### 方式一
+## 后台文章编辑页面示例
 
-直接下载最新构建好的版本，然后部署即可。
+![image-20210116110530728](https://pan.codehome.vip/images/image-20210116110530728.png)
 
-https://github.com/halo-dev/halo-admin/releases
+## 前端显示示例
 
-#### 方式二
+​	在官方的post变量上，新增resources属性，当前在本人已fork的[halo-theme-xue](https://github.com/mytianya/halo-theme-xue)主题中已添加。
 
-1、克隆项目：
-
-```bash
-git clone https://github.com/halo-dev/halo-admin
-```
-
-2、检出最新版本：
-
-```bash
-git checkout v1.4.2
-```
-
-3、打包构建：
-
-```bash
-npm i
-
-npm run build
-```
-
-最后，得到 dist 文件夹之后就可以单独部署了。
+![image-20210116110632869](https://pan.codehome.vip/images/image-20210116110632869.png)

@@ -35,8 +35,8 @@
           </a-form-item>
           <a-form-item label="类型">
             <a-select v-model="res.type" placeholder="请选择下载协议" style="width: 150px">
-              <a-select-option v-for="(obj,index) in types" :key="index" :value="obj.value" :title="obj.name">
-                {{ obj.name }}
+              <a-select-option v-for="type in types" :value="type.value" :title="type.name" :key="type.value">
+                {{ type.name }}
               </a-select-option>
             </a-select>
           </a-form-item>
