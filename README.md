@@ -21,10 +21,10 @@
 
 ## 后台文章编辑页面示例
 
-![image-20210116110530728](https://pan.codehome.vip/images/image-20210116110530728.png)
+![image-20210116110530728.png](https://i.loli.net/2021/01/16/Ef2YhqGkAuBWt45.png)
 
 ## 前端显示示例
 
-​	在官方的post变量上，新增resources属性，当前在本人已fork的[halo-theme-xue](https://github.com/mytianya/halo-theme-xue)主题中已添加。
+在官方的post变量上，新增resources属性，当前在本人已fork的[halo-theme-xue](https://github.com/mytianya/halo-theme-xue)主题中已添加。
 
-![image-20210116110632869](https://pan.codehome.vip/images/image-20210116110632869.png)
+![image-20210116110632869.png](https://i.loli.net/2021/01/16/Njr6JmZQRzk15nd.png)
