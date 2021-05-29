@@ -10,34 +10,15 @@
   >
     <template slot="content">
       <div class="custom-tab-wrapper">
-        <a-tabs
-          v-model="activeKey"
-          @change="handleTabsChanged"
-        >
-          <a-tab-pane
-            tab="文章"
-            key="post"
-          >
-            <a-list
-              :loading="postCommentsLoading"
-              :dataSource="converttedPostComments"
-            >
-              <a-list-item
-                slot="renderItem"
-                slot-scope="item"
-              >
+        <a-tabs v-model="activeKey" @change="handleTabsChanged">
+          <a-tab-pane tab="文章" key="post">
+            <a-list :loading="postCommentsLoading" :dataSource="converttedPostComments">
+              <a-list-item slot="renderItem" slot-scope="item">
                 <a-list-item-meta>
-                  <a-avatar
-                    class="bg-white"
-                    slot="avatar"
-                    :src="'//cn.gravatar.com/avatar/' + item.gravatarMd5 + '&d=mm'"
-                    size="large"
-                  />
+                  <a-avatar class="bg-white" slot="avatar" :src="item.avatar" size="large" />
                   <template slot="title">
-                    <a
-                      :href="item.authorUrl"
-                      target="_blank"
-                    >{{ item.author }}</a>：<span v-html="item.content"></span>
+                    <a :href="item.authorUrl" target="_blank">{{ item.author }}</a
+                    >：<span v-html="item.content"></span>
                   </template>
                   <template slot="description">
                     {{ item.createTime | timeAgo }}
@@ -46,30 +27,14 @@
               </a-list-item>
             </a-list>
           </a-tab-pane>
-          <a-tab-pane
-            tab="页面"
-            key="sheet"
-          >
-            <a-list
-              :loading="sheetCommentsLoading"
-              :dataSource="converttedSheetComments"
-            >
-              <a-list-item
-                slot="renderItem"
-                slot-scope="item"
-              >
+          <a-tab-pane tab="页面" key="sheet">
+            <a-list :loading="sheetCommentsLoading" :dataSource="converttedSheetComments">
+              <a-list-item slot="renderItem" slot-scope="item">
                 <a-list-item-meta>
-                  <a-avatar
-                    class="bg-white"
-                    slot="avatar"
-                    :src="'//cn.gravatar.com/avatar/' + item.gravatarMd5 + '&d=mm'"
-                    size="large"
-                  />
+                  <a-avatar class="bg-white" slot="avatar" :src="item.avatar" size="large" />
                   <template slot="title">
-                    <a
-                      :href="item.authorUrl"
-                      target="_blank"
-                    >{{ item.author }}</a>：<span v-html="item.content"></span>
+                    <a :href="item.authorUrl" target="_blank">{{ item.author }}</a
+                    >：<span v-html="item.content"></span>
                   </template>
                   <template slot="description">
                     {{ item.createTime | timeAgo }}
@@ -82,10 +47,7 @@
       </div>
     </template>
     <span class="header-comment">
-      <a-badge
-        dot
-        v-if="postComments.length > 0 || sheetComments.length > 0"
-      >
+      <a-badge dot v-if="postComments.length > 0 || sheetComments.length > 0">
         <a-icon type="bell" />
       </a-badge>
       <a-badge v-else>
@@ -98,7 +60,6 @@
 <script>
 import commentApi from '@/api/comment'
 import marked from 'marked'
-import { decodeHTML } from '@/utils/util'
 
 export default {
   name: 'HeaderComment',
@@ -114,14 +75,14 @@ export default {
   },
   computed: {
     converttedPostComments() {
-      return this.postComments.map((comment) => {
-        comment.content = marked(decodeHTML(comment.content))
+      return this.postComments.map(comment => {
+        comment.content = marked(comment.content)
         return comment
       })
     },
     converttedSheetComments() {
-      return this.sheetComments.map((comment) => {
-        comment.content = marked(decodeHTML(comment.content))
+      return this.sheetComments.map(comment => {
+        comment.content = marked(comment.content)
         return comment
       })
     }
@@ -148,7 +109,7 @@ export default {
       }
       commentApi
         .latestComment('posts', 5, 'AUDITING')
-        .then((response) => {
+        .then(response => {
           this.postComments = response.data.data
         })
         .finally(() => {
@@ -163,7 +124,7 @@ export default {
       }
       commentApi
         .latestComment('sheets', 5, 'AUDITING')
-        .then((response) => {
+        .then(response => {
           this.sheetComments = response.data.data
         })
         .finally(() => {

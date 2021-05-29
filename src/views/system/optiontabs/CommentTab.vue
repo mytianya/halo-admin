@@ -1,12 +1,6 @@
 <template>
   <div>
-    <a-form-model
-      ref="commentOptionsForm"
-      :model="options"
-      :rules="rules"
-      layout="vertical"
-      :wrapperCol="wrapperCol"
-    >
+    <a-form-model ref="commentOptionsForm" :model="options" :rules="rules" layout="vertical" :wrapperCol="wrapperCol">
       <a-form-model-item label="评论者头像：">
         <a-select v-model="options.comment_gravatar_default">
           <a-select-option value="mm">默认</a-select-option>
@@ -27,26 +21,17 @@
       <a-form-model-item label="评论回复通知对方：">
         <a-switch v-model="options.comment_reply_notice" />
       </a-form-model-item>
-      <a-form-model-item
-        label="API 评论开关："
-        help="* 关闭之后将无法进行评论"
-      >
+      <a-form-model-item label="API 评论开关：" help="* 关闭之后将无法进行评论">
         <a-switch v-model="options.comment_api_enabled" />
       </a-form-model-item>
-      <a-form-model-item label="评论模块 JS：">
-        <a-input
-          type="textarea"
-          :autoSize="{ minRows: 2 }"
-          v-model="options.comment_internal_plugin_js"
-          placeholder="该设置仅对内置的评论模块有效"
-        />
+      <a-form-model-item label="评论模块 JS：" help="* 该设置需要主题支持">
+        <a-input type="textarea" :autoSize="{ minRows: 2 }" v-model="options.comment_internal_plugin_js" />
+      </a-form-model-item>
+      <a-form-model-item label="Gravatar 镜像源：" help="* 例如：//gravatar.com/avatar/">
+        <a-input v-model="options.gravatar_source" />
       </a-form-model-item>
       <a-form-model-item label="每页显示条数： ">
-        <a-input-number
-          v-model="options.comment_page_size"
-          :min="1"
-          style="width:100%"
-        />
+        <a-input-number v-model="options.comment_page_size" :min="1" style="width:100%" />
       </a-form-model-item>
       <a-form-model-item label="占位提示：">
         <a-input v-model="options.comment_content_placeholder" />

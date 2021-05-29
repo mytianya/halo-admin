@@ -2,7 +2,7 @@
 @import './style.less';
 
 body {
-  overflow-y: scroll;
+  overflow-y: overlay;
   padding: 0 !important;
 }
 
@@ -596,6 +596,10 @@ body {
   }
 }
 
+.ant-anchor-link-title {
+  white-space: normal!important;
+}
+
 .bottom-control {
   position: absolute;
   bottom: 0px;
@@ -824,6 +828,14 @@ body {
   }
 }
 
+.ant-list-item {
+  .ant-list-item-main,
+  .ant-list-item-meta-content,
+  pre {
+    overflow-x: auto;
+  }
+}
+
 .journal-list-content,
 .comment-drawer-content {
   img {
@@ -856,6 +868,14 @@ body {
   background: white;
   z-index: 999;
   top: 0;
+}
+
+.ant-affix {
+  z-index: 1000!important;
+}
+
+.v-note-wrapper {
+  z-index: 999!important;
 }
 
 #nprogress {

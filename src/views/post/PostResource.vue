@@ -1,14 +1,12 @@
 <template>
-  <div>
-
-  </div>
+  <div></div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      resources: [],
+      resources: []
     }
   },
   methods: {
@@ -17,13 +15,13 @@ export default {
     },
     plusResourceItem() {
       this.resources.push({})
-    },
+    }
   },
   props: {
     post: {
       type: Object,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 }
 </script>

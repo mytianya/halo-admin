@@ -1,16 +1,17 @@
 import Vue from 'vue'
-import router from './router'
-import store from './store'
-import NProgress from 'nprogress' // progress bar
+import router from '@/router'
+import store from '@/store'
+import NProgress from 'nprogress'
 import { setDocumentTitle, domTitle } from '@/utils/domUtil'
-import adminApi from '@api/admin'
+import adminApi from '@/api/admin'
 
 NProgress.configure({ showSpinner: false, speed: 500 })
 
 const whiteList = ['Login', 'Install', 'NotFound', 'ResetPassword'] // no redirect whitelist
 
 let progressTimer = null
-router.beforeEach(async(to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+  onProgressTimerDone()
   progressTimer = setTimeout(() => {
     NProgress.start()
   }, 250)
@@ -26,12 +27,14 @@ router.beforeEach(async(to, from, next) => {
       next({
         name: 'Install'
       })
+      onProgressTimerDone()
       return
     }
     if (to.name === 'Login') {
       next({
         name: 'Dashboard'
       })
+      onProgressTimerDone()
       return
     }
 
@@ -53,9 +56,17 @@ router.beforeEach(async(to, from, next) => {
       redirect: to.fullPath
     }
   })
+  onProgressTimerDone()
 })
 
 router.afterEach(() => {
-  clearTimeout(progressTimer)
-  NProgress.done()
+  onProgressTimerDone()
 })
+
+function onProgressTimerDone() {
+  if (progressTimer && progressTimer !== 0) {
+    clearTimeout(progressTimer)
+    progressTimer = null
+    NProgress.done()
+  }
+}
