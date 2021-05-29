@@ -44,7 +44,7 @@
             <a-input placeholder="提取码" v-model="res.shareCode" style="max-width:80px"/>
           </a-form-item>
           <a-form-item>
-            <a-switch checked-children="可见" un-checked-children="不可见" default-checked v-model="res.status"/>
+            <a-switch checked-children="可见" un-checked-children="关闭" default-checked v-model="res.status"/>
           </a-form-item>
           <a-form-item>
             <a-button type="danger" icon="minus" @click="minusResourceItem(index)" size="small"></a-button>
